@@ -1,8 +1,8 @@
 
-var canvas = document.getElementById("main");
-var ctx = canvas.getContext("2d");
-var hCanvas = document.getElementById("hidden");
-var hCtx = hCanvas.getContext("2d");
+var canvas;
+var ctx;
+var hCanvas;
+var hCtx;
 
 const FPS = 60;
 const FPSSample = 10;
