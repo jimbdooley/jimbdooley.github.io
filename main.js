@@ -23,6 +23,7 @@ function bc(){
 }
 
 function onload(){
+	stuff = [];
 	for(let h = 0; h<stuff.length; h++){
 		for(let i = 0; i<stuff[h][0].length; i++){
 			stuff[h][0][i].pop();
