@@ -1,10 +1,12 @@
-const FPS = 60;
-const FPSSample = 10;
-const TIME_LIMIT = 60; //in seconds
+
 var canvas = document.getElementById("main");
 var ctx = canvas.getContext("2d");
 var hCanvas = document.getElementById("hidden");
 var hCtx = hCanvas.getContext("2d");
+
+const FPS = 60;
+const FPSSample = 10;
+const TIME_LIMIT = 60; 
 
 var state = {
 	angle:3.14159,
