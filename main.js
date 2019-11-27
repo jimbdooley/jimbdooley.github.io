@@ -35,7 +35,7 @@ function onload(){
 		solve(stuff[h][0],stuff[h][1]);
 		break;
 	}
-	
+	bc();
 }
 
 
