@@ -23,6 +23,10 @@ function bc(){
 }
 
 function onload(){
+	canvas = document.getElementById("main");
+	ctx = canvas.getContext("2d");
+	hCanvas = document.getElementById("hidden");		
+	hCtx = hCanvas.getContext("2d");
 	stuff = [];
 	for(let h = 0; h<stuff.length; h++){
 		for(let i = 0; i<stuff[h][0].length; i++){
