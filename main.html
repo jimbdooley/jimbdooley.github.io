@@ -1,0 +1,156 @@
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body onload="bl_onload();">
+	<button onclick="page('gemstones')">Gemstones</button>
+	<button onclick="page('ml_anims')">ML Animations</button>
+	<button onclick="page('gcp')">GC Prototype</button>
+	<button onclick="page('doodles')">Doodles</button>
+	<button onclick="page('cyber_roller')">Cyber Roller</button>
+	<button onclick="page('simple_games')">simple games</button>
+	<button onclick="page('tools')">tools</button>
+	<br>
+	<div id="gemstones">
+		gemstones
+	</div>
+	<div id="ml_anims" style="display:none;">
+		<div>
+			<canvas id="logisticCanvas" width=600 height=400 style="border-width:3;"></canvas>
+			<br>
+			<p id="logistic_regression_cost"></p>
+			<span id="logistic_regression_learn_rate"></span>
+			<button onclick="RL.learn.rate -= 0.003">-</button>
+			<button onclick="RL.learn.rate += 0.003">+</button>
+			<br>
+			<br>
+			<button onclick="RL.init()">New Data</button>
+			<button onclick="RL.learn.init()">Re-initialize theta</button>
+		</div>
+		<div>
+			<canvas id="lr2Canvas" width=600 height=400 style="border-width:3"></canvas>
+			<br>
+			<button onclick="controller.init()">New data</button>
+		</div>
+		<div>
+			<canvas id="lr3dCanvas" width=800 height=600 style="border-width:3"></canvas>
+			<canvas id="h_lr3dCanvas" width=800 height=600 style="display:none;"></canvas>
+		</div>
+	</div>
+	<div id="gcp" style="display:none;">
+
+		<canvas id="gcp_canvas" height=600 width=600 style="border:1px solid black"></canvas>
+	</div>
+	<div id="cyber_roller" style="display:none;">
+		<canvas height="540" width="540" id="ball_canvas"></canvas>
+		<p id="fps"></p>
+		<br>
+	</div>
+	<div id="simple_games" style="display:none;">
+		<br>
+		<canvas id="mainCanvas" width=600 height=400 style="border-width:3"></canvas>
+		<br>
+		<canvas id="main" style="background:#eeeeee;" height='360' width='600'></canvas>
+		<canvas id="hidden" style="background:#eeeeee; display:none;" height='300' width='500'></canvas>
+		<br>
+		<button id="ant_btn" onclick="calculateGame();animateInit();document.getElementById('ant_btn').style.display='none';">Animate</button>
+		<br>
+		<br>
+
+		
+		
+	</div>
+	<div id="doodles" style="display: none;">
+		<canvas id="bl_canvas" style="background:#aaaaaa;" height='600' width='1000'></canvas>
+		<canvas id="bl_hCanvas" style="background:#aaaaaa; display:none;" height='600' width='1000'></canvas>
+	</div>
+	<div id="tools" style ="display:none;">
+		<div style="display:inline;">
+		  <canvas id="tri_canvas"  height=630 width=450 style="display:inline;border:1px solid black;"></canvas>
+		  <canvas id="tri_canvas2"  height=630 width=450 style="display:inline;border:1px solid black;"></canvas>
+		  <br>	
+		  <button onclick="do_next()">Triangulate</button>  
+		  </div>
+		<script src="triangulator.js"></script>
+		<br>
+		<br>
+		<canvas id="mgen_canvas" height=400 width=400 style="border:1px solid black;"></canvas>
+		<br>
+		<button onclick="makeCircleMap()">makeCircleMap</button>
+		<button onclick="viewNextSavedCircle()">viewSavedCircles</button>
+		<button onclick="makeSquareMap()">makeSquareMap</button>
+		<button onclick="viewNextSavedSquare()">viewSavedSquares</button>
+		<button onclick="makeHesqMap()">makeHesqMap</button>
+		<button onclick="viewNextSavedHesq()">viewSavedHesqs</button>
+		<button onclick="makeHexagonMap()">makeHexagonMap</button>
+		<button onclick="viewNextSavedHexagon()">viewSavedHexagons</button>
+		<button onclick="makeTriangleMap()">makeTriangleMap</button>
+		<button onclick="viewNextSavedTriangle()">viewSavedTriangles</button>
+		<button onclick="makeOctagonMap()">makeOctagonMap</button>
+		<button onclick="viewNextSavedOctagon()">viewSavedOctagons</button>
+		<button onclick="S._trimRequested=true">trim</button>
+	</div>
+</body>
+<script>
+let ENABLES = {
+	ml_anims: false
+}
+const allDivs = ["gemstones", "ml_anims", "cyber_roller", "simple_games", "tools", "gcp", "doodles"]
+function page(divId) {
+	for (const div of allDivs) {
+		document.getElementById(div).style.display = "none"
+	}
+	document.getElementById(divId).style.display = "inline"
+
+	ENABLES.ml_anims = divId == "ml_anims"
+
+}
+</script>
+<script src="ml_vis.js"></script>
+<script src="ant_init.js"></script>
+<script src="ant_animate.js"></script>
+<script src="ant_math.js"></script>
+<script src="snake.js"></script>
+<script src="mapgen/funcs.js"></script>
+<script src="mapgen/squaresSaved.js"></script>
+<script src="mapgen/hexagonsSaved.js"></script>
+<script src="mapgen/trianglesSaved.js"></script>
+<script src="mapgen/hesqsSaved.js"></script>
+<script src="mapgen/octagonsSaved.js"></script>
+<script src="mapgen/circlesSaved.js"></script>
+<script src="mapgen/squares.js"></script>
+<script src="mapgen/triangles.js"></script>
+<script src="mapgen/hexagons.js"></script>
+<script src="mapgen/octagons.js"></script>
+<script src="mapgen/circles.js"></script>
+<script src="mapgen/hesqs.js"></script>
+<script src="mapgen/main.js"></script>
+<script src="ball/Constants.js"></script>
+<script src="ball/assetMakers.js"></script>
+<script src="ball/MathFuncs.js"></script>
+<script src="ball/GeometryArrayMakers.js"></script>
+<script src="ball/DisplayObject.js"></script>
+<script src="ball/OpenGLHelpers.js"></script>
+
+<script src="ball/start.js"></script>
+<script src="ball/World.js"></script>
+<script src="ball/DrawerBall.js"></script>
+<script src="ball/Ball.js"></script>
+<script src="ball/DrawerFloor2.js"></script>
+<script src="ball/listeners.js"></script>
+<script src="ball/main.js"></script>
+<script> const G = {};</script>
+<script src="gcp/levels.js"></script>
+<script src="gcp/screenSetup.js"></script>
+<script src="gcp/drawCards.js"></script>
+<script src="gcp/showGame.js"></script>
+<script src="gcp/game.js"></script>
+<script src="gcp/listeners.js"></script>
+<script src="gcp/main.js"></script>
+<script src ="blossom/apples.js"></script>
+<script src ="blossom/blossoms.js"></script>
+<script src ="blossom/main.js"></script>
+<script src ="blossom/animate.js"></script>
+<!--
+-->
+</html>
