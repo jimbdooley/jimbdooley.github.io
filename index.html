@@ -10,6 +10,7 @@
 	<button onclick="page('cyber_roller')">Cyber Roller</button>
 	<button onclick="page('simple_games')">simple games</button>
 	<button onclick="page('tools')">tools</button>
+	<button onclick="page('gem_craft')">Gem Crafting</button>
 	<br>
 	<div id="gemstones">
 		gemstones
@@ -49,13 +50,6 @@
 	<div id="simple_games" style="display:none;">
 		<br>
 		<canvas id="mainCanvas" width=600 height=400 style="border-width:3"></canvas>
-		<br>
-		<canvas id="main" style="background:#eeeeee;" height='360' width='600'></canvas>
-		<canvas id="hidden" style="background:#eeeeee; display:none;" height='300' width='500'></canvas>
-		<br>
-		<button id="ant_btn" onclick="calculateGame();animateInit();document.getElementById('ant_btn').style.display='none';">Animate</button>
-		<br>
-		<br>
 
 		
 		
@@ -63,6 +57,29 @@
 	<div id="doodles" style="display: none;">
 		<canvas id="bl_canvas" style="background:#aaaaaa;" height='600' width='1000'></canvas>
 		<canvas id="bl_hCanvas" style="background:#aaaaaa; display:none;" height='600' width='1000'></canvas>
+		<br>
+		<canvas id="main" style="background:#eeeeee;" height='360' width='600'></canvas>
+		<canvas id="hidden" style="background:#eeeeee; display:none;" height='300' width='500'></canvas>
+		<br>
+		<button id="ant_btn" onclick="calculateGame();animateInit();document.getElementById('ant_btn').style.display='none';">Animate</button>
+		<br>
+		<br>
+	</div>
+	<div id="gem_craft" style="display: none;">
+		
+		<div id="heart_stuff">
+			<canvas id="heart_canvas" height=500 width=500 style="display:inline-block;border:1px solid black;"></canvas>
+			<div style="display:inline-block;">
+			
+			<div id="params" style="display:inline-block;border:1px solid black;"></div>
+			<div id="params2" style="display:inline-block;border:1px solid black;"></div>
+			</div>
+		</div>
+		<div id="round_stuff">
+			
+			<canvas id="round_canvas" height=600 width=800 style="display:inline-block;border:1px solid black;"></canvas>
+			<div id="round_params" style="display:inline-block;border:1px solid black;"></div>
+		</div>
 	</div>
 	<div id="tools" style ="display:none;">
 		<div style="display:inline;">
@@ -93,9 +110,11 @@
 </body>
 <script>
 let ENABLES = {
-	ml_anims: false
+	ml_anims: false,
+	gem_anims: false,
+	cyber_roller: false,
 }
-const allDivs = ["gemstones", "ml_anims", "cyber_roller", "simple_games", "tools", "gcp", "doodles"]
+const allDivs = ["gem_craft","gemstones", "ml_anims", "cyber_roller", "simple_games", "tools", "gcp", "doodles"]
 function page(divId) {
 	for (const div of allDivs) {
 		document.getElementById(div).style.display = "none"
@@ -103,6 +122,8 @@ function page(divId) {
 	document.getElementById(divId).style.display = "inline"
 
 	ENABLES.ml_anims = divId == "ml_anims"
+	ENABLES.gem_anims = divId == "gem_craft"
+	ENABLES.cyber_roller = divId == "cyber_roller"
 
 }
 </script>
@@ -151,6 +172,31 @@ function page(divId) {
 <script src ="blossom/blossoms.js"></script>
 <script src ="blossom/main.js"></script>
 <script src ="blossom/animate.js"></script>
+<script>
+heart_canvas = document.getElementById('heart_canvas');
+heart_gl = heart_canvas.getContext('webgl');
+round_canvas = document.getElementById('round_canvas');
+round_gl = round_canvas.getContext('webgl');
+</script>
+<script src="general/set_color.js"></script>
+<script src="general/shader_funcs.js"></script>
+<script src="general/shaders_heart.js"></script>
+<script src="general/textures.js"></script>
+<script src="general/geometry.js"></script>
+<script src="general/geo_funcs.js"></script>
+<script src="general/funcs.js"></script>
+
+<script src="heart_geometry.js"></script>
+<script src="heart_get_normal_func.js"></script>
+<script src="heartNormBox.js"></script>
+<script src="heart_final.js"></script>
+
+<script src="round_geometry.js"></script>
+<script src="round_get_normal_func.js"></script>
+<script src="roundNormBox.js"></script>
+<script src="round_final.js"></script>
+
+<script src="heart_main.js"></script>
 <!--
 -->
 </html>

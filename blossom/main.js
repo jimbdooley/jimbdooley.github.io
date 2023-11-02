@@ -18,7 +18,6 @@ function bc(){
 			}
 		}
 	}
-	console.log(JSON.stringify(adj));
 	solve(adj);
 }
 

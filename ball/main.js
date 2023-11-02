@@ -15,6 +15,7 @@ const ball_S = {
 
 function ball_loop() {
     requestAnimationFrame(ball_loop)
+    if (!ENABLES.cyber_roller) return
     ball_gl.clear(ball_gl.COLOR_BUFFER_BIT)
     ball_gl.clear(ball_gl.DEPTH_BUFFER_BIT)
     const t_dontUse = Date.now()
