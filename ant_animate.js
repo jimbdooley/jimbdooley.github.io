@@ -67,8 +67,6 @@ function animate(){
 			}
 		}
 	}
-	var background = new Image();
-	background.src = "grid.png";
 	//hCtx.drawImage(background,0,0,1000,600);
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	ctx.drawImage(hCanvas,0,0);

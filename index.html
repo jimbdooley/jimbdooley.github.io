@@ -1,73 +1,146 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
+<style>
+.unit {
+	padding: 10px 10px 10px 10px;
+	background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(139,139,241,1) 100%);
+	border-radius: 10px;
+	margin-top:13px;
+	width: fit-content;
+}
+.info_p{
+	font-size: 20px;
+}
+.nav_btn {
+	float: left;
+	padding-top: 0px;
+	width: 80px;
+	height: 50px;
+	background-color: #eeeeee;
+}
+.nav_btn:hover {
+	background-color: #cccccc;
+}
+#nav_bar {
+	padding-top: 0px;
+	padding-bottom: 30px;
+}
+#gem_collector_b {
+	background-color: #888888;
+}
+</style>
 </head>
 <body onload="bl_onload();">
-	<button onclick="page('gemstones')">Gemstones</button>
-	<button onclick="page('ml_anims')">ML Animations</button>
-	<button onclick="page('gcp')">GC Prototype</button>
-	<button onclick="page('doodles')">Doodles</button>
-	<button onclick="page('cyber_roller')">Cyber Roller</button>
-	<button onclick="page('simple_games')">simple games</button>
-	<button onclick="page('tools')">tools</button>
-	<button onclick="page('gem_craft')">Gem Crafting</button>
+	<div id="nav_bar">
+		<button class="nav_btn" id="gem_collector_b" onclick="page('gem_collector')">Gem Collector 3D</button>
+		<button class="nav_btn" id="gemstones_b" onclick="page('gemstones')" id="first_page">Gemstones</button>
+		<button class="nav_btn" id="ml_anims_b" onclick="page('ml_anims')">ML Animations</button>
+		<button class="nav_btn" id="gcp_b" onclick="page('gcp')">GC Prototype</button>
+		<button class="nav_btn" id="doodles_b" onclick="page('doodles')">Doodles</button>
+		<button class="nav_btn" id="cyber_roller_b" onclick="page('cyber_roller')">Cyber Roller</button>
+		<button class="nav_btn" id="simple_games_b" onclick="page('simple_games')">simple games</button>
+		<button class="nav_btn" id="tools_b" onclick="page('tools')">tools</button>
+		<button class="nav_btn" id="gem_craft_b" onclick="page('gem_craft')">Gem Crafting</button>
+	</div>
 	<br>
 	<div id="gemstones">
-		gemstones
+		<div class="unit">
+			<span>A demo for my tcg: </span>
+			<a class="info_p" target="_blank" href="https://www.atlazan.com">atlazan.com</a>
+			<br><br>
+			<img src="1904.jpg" style="height:600px;">
+		</div>
+	</div>
+	<div id="gem_collector" style="display: none;">
+		<div class="unit">
+			<img src="gc3d.webp">
+		</div>
 	</div>
 	<div id="ml_anims" style="display:none;">
-		<div>
-			<canvas id="logisticCanvas" width=600 height=400 style="border-width:3;"></canvas>
+		<div class="unit">
+			<p class="info_p">Some animations of primitive ML algorithms.</p>
+			<p class="info_p">Logistic Regression:</p>
+			<span id="logistic_regression_cost"></span>
 			<br>
-			<p id="logistic_regression_cost"></p>
 			<span id="logistic_regression_learn_rate"></span>
 			<button onclick="RL.learn.rate -= 0.003">-</button>
 			<button onclick="RL.learn.rate += 0.003">+</button>
-			<br>
-			<br>
+			<br><br>
 			<button onclick="RL.init()">New Data</button>
 			<button onclick="RL.learn.init()">Re-initialize theta</button>
-		</div>
-		<div>
-			<canvas id="lr2Canvas" width=600 height=400 style="border-width:3"></canvas>
 			<br>
-			<button onclick="controller.init()">New data</button>
+			<br>
+			<canvas id="logisticCanvas" width=600 height=400 style="border-width:3; background-color: white;"></canvas>
+			<br>
+			<br>
 		</div>
-		<div>
-			<canvas id="lr3dCanvas" width=800 height=600 style="border-width:3"></canvas>
-			<canvas id="h_lr3dCanvas" width=800 height=600 style="display:none;"></canvas>
+		<div class="unit">
+			<p class="info_p">Linear Regression:</p>
+			<button onclick="controller.init()">New data</button>
+			<br><br>
+			<canvas id="lr2Canvas" width=600 height=400 style="border-width:3; background-color: white;"></canvas>
+			<br>
+		</div>
+		<div class="unit">
+			<p class="info_p">Linear Regression in 3D:</p>
+			<p class="info_p">Done with the 2d drawing API for canvas, and a lot of math.</p>
+			<canvas id="lr3dCanvas" width=800 height=600 style="border-width:3; background-color: white;"></canvas>
+			<canvas id="h_lr3dCanvas" width=800 height=600 style="display:none; background-color: white;"></canvas>
 		</div>
 	</div>
 	<div id="gcp" style="display:none;">
-
-		<canvas id="gcp_canvas" height=600 width=600 style="border:1px solid black"></canvas>
+		<div class = "unit">
+			<p class="info_p">This is the prototype of Gem Collector 3D.</p>
+			<p class="info_p">To play, drag cards onto the grid such that all rows and column match either shape or color, then click the green button.</p>
+			<canvas id="gcp_canvas" height=450 width=600 style="border:1px solid black;background-color: white;"></canvas>
+		</div>
 	</div>
 	<div id="cyber_roller" style="display:none;">
-		<canvas height="540" width="540" id="ball_canvas"></canvas>
-		<p id="fps"></p>
-		<br>
+		<div class="unit">
+			<p class="info_p">This was a prototype of an endless runner I was considering.</p>
+			<p class="info_p">Although I didn't make it, I enjoyed making the ball squishy and fun. Use all 4 arrows to move it around.</p>
+			<canvas height="440" width="540" id="ball_canvas"></canvas>
+			<br>
+		</div>
 	</div>
 	<div id="simple_games" style="display:none;">
 		<br>
-		<canvas id="mainCanvas" width=600 height=400 style="border-width:3"></canvas>
+		<div class="unit">
+			<p class="info_p">A while ago there was a semi-viral challenge of coding the game "Snake" as quickly as possible.</p>
+		<canvas id="mainCanvas" width=600 height=400 style="border-width:3;background-color: white;" ></canvas>
+		</div>
 
 		
 		
 	</div>
 	<div id="doodles" style="display: none;">
-		<canvas id="bl_canvas" style="background:#aaaaaa;" height='600' width='1000'></canvas>
-		<canvas id="bl_hCanvas" style="background:#aaaaaa; display:none;" height='600' width='1000'></canvas>
-		<br>
-		<canvas id="main" style="background:#eeeeee;" height='360' width='600'></canvas>
-		<canvas id="hidden" style="background:#eeeeee; display:none;" height='300' width='500'></canvas>
-		<br>
-		<button id="ant_btn" onclick="calculateGame();animateInit();document.getElementById('ant_btn').style.display='none';">Animate</button>
-		<br>
-		<br>
+		<div class="unit">
+			<p class="info_p">Edmond's blossom algorithm for level 5 of Google's foobar challenge. Solved by parsing CS research papers.</p>
+			<canvas id="bl_canvas" style="background:white;" height='600' width='1000'></canvas>
+			<canvas id="bl_hCanvas" style="background:white; display:none;" height='600' width='1000'></canvas>
+		</div>
+		
+		<div class="unit">
+			<p class="info_p">I'm fascinating by simulations. Here's an old one of robot ants.</p>
+			
+			<button id="ant_btn" onclick="calculateGame();animateInit();document.getElementById('ant_btn').style.display='none';">Animate</button>
+			<br><br>
+			<canvas id="main" style="background:#eeeeee;" height='360' width='600'></canvas>
+			<canvas id="hidden" style="background:#eeeeee; display:none;" height='300' width='500'></canvas>
+			<br>
+			<br>
+		</div>
+		<div class="unit">
+			<p class="info_p">The game of life with a spec moving around on it.</p>
+			<canvas id="glife_canvas" width=300 height=300 style="width:300px;height:300px;"></canvas>
+		</div>
 	</div>
 	<div id="gem_craft" style="display: none;">
 		
-		<div id="heart_stuff">
+		<div id="heart_stuff" class="unit">
+			<p class="info_p">A tool made to perfect the gem shapes for Gem Collector 3D.</p>
+			<p class="info_p">Use your scroll wheel on the constants on the side to adjust.</p>
 			<canvas id="heart_canvas" height=500 width=500 style="display:inline-block;border:1px solid black;"></canvas>
 			<div style="display:inline-block;">
 			
@@ -75,37 +148,41 @@
 			<div id="params2" style="display:inline-block;border:1px solid black;"></div>
 			</div>
 		</div>
-		<div id="round_stuff">
-			
+		<div id="round_stuff" class="unit">
+			<p class="info_p">Similarily, this can be used to adjust the reflection texture.</p>
 			<canvas id="round_canvas" height=600 width=800 style="display:inline-block;border:1px solid black;"></canvas>
 			<div id="round_params" style="display:inline-block;border:1px solid black;"></div>
 		</div>
 	</div>
 	<div id="tools" style ="display:none;">
-		<div style="display:inline;">
-		  <canvas id="tri_canvas"  height=630 width=450 style="display:inline;border:1px solid black;"></canvas>
-		  <canvas id="tri_canvas2"  height=630 width=450 style="display:inline;border:1px solid black;"></canvas>
-		  <br>	
-		  <button onclick="do_next()">Triangulate</button>  
-		  </div>
-		<script src="triangulator.js"></script>
-		<br>
-		<br>
-		<canvas id="mgen_canvas" height=400 width=400 style="border:1px solid black;"></canvas>
-		<br>
-		<button onclick="makeCircleMap()">makeCircleMap</button>
-		<button onclick="viewNextSavedCircle()">viewSavedCircles</button>
-		<button onclick="makeSquareMap()">makeSquareMap</button>
-		<button onclick="viewNextSavedSquare()">viewSavedSquares</button>
-		<button onclick="makeHesqMap()">makeHesqMap</button>
-		<button onclick="viewNextSavedHesq()">viewSavedHesqs</button>
-		<button onclick="makeHexagonMap()">makeHexagonMap</button>
-		<button onclick="viewNextSavedHexagon()">viewSavedHexagons</button>
-		<button onclick="makeTriangleMap()">makeTriangleMap</button>
-		<button onclick="viewNextSavedTriangle()">viewSavedTriangles</button>
-		<button onclick="makeOctagonMap()">makeOctagonMap</button>
-		<button onclick="viewNextSavedOctagon()">viewSavedOctagons</button>
-		<button onclick="S._trimRequested=true">trim</button>
+		<div class="unit">
+			<div style="display:inline;">
+				<p class="info_p">A tool I made to convert arbitrary fonts to meshses.</p>
+				<button onclick="do_next()">Triangulate</button>  <br><br>
+			  <canvas id="tri_canvas"  height=630 width=450 style="display:inline;border:1px solid black;background-color: white;"></canvas>
+			  <canvas id="tri_canvas2"  height=630 width=450 style="display:inline;border:1px solid black;background-color: white;"></canvas>
+			  <br>	
+			</div>
+			<script src="triangulator.js"></script>
+		</div>
+		<div class="unit">
+			<p class="info_p">A level generation tool for Gem Collector 3D.</p>
+			<button onclick="makeCircleMap()">makeCircleMap</button>
+			<button onclick="viewNextSavedCircle()">viewSavedCircles</button>
+			<button onclick="makeSquareMap()">makeSquareMap</button>
+			<button onclick="viewNextSavedSquare()">viewSavedSquares</button>
+			<button onclick="makeHesqMap()">makeHesqMap</button>
+			<button onclick="viewNextSavedHesq()">viewSavedHesqs</button>
+			<button onclick="makeHexagonMap()">makeHexagonMap</button>
+			<button onclick="viewNextSavedHexagon()">viewSavedHexagons</button>
+			<button onclick="makeTriangleMap()">makeTriangleMap</button>
+			<button onclick="viewNextSavedTriangle()">viewSavedTriangles</button>
+			<button onclick="makeOctagonMap()">makeOctagonMap</button>
+			<button onclick="viewNextSavedOctagon()">viewSavedOctagons</button>
+			<button onclick="S._trimRequested=true">trim</button>
+			<br>
+			<canvas id="mgen_canvas" height=400 width=400 style="border:1px solid black;background-color: white;"></canvas>
+		</div>
 	</div>
 </body>
 <script>
@@ -113,17 +190,21 @@ let ENABLES = {
 	ml_anims: false,
 	gem_anims: false,
 	cyber_roller: false,
+	doodles: false,
 }
-const allDivs = ["gem_craft","gemstones", "ml_anims", "cyber_roller", "simple_games", "tools", "gcp", "doodles"]
+const allDivs = ["gem_craft","gemstones", "gem_collector", "ml_anims", "cyber_roller", "simple_games", "tools", "gcp", "doodles"]
 function page(divId) {
 	for (const div of allDivs) {
 		document.getElementById(div).style.display = "none"
+		document.getElementById(div + "_b").style.backgroundColor = "#eeeeee"
 	}
 	document.getElementById(divId).style.display = "inline"
+		document.getElementById(divId + "_b").style.backgroundColor = "#888888"
 
 	ENABLES.ml_anims = divId == "ml_anims"
 	ENABLES.gem_anims = divId == "gem_craft"
 	ENABLES.cyber_roller = divId == "cyber_roller"
+	ENABLES.doodles = divId == "doodles"
 
 }
 </script>
@@ -177,6 +258,7 @@ heart_canvas = document.getElementById('heart_canvas');
 heart_gl = heart_canvas.getContext('webgl');
 round_canvas = document.getElementById('round_canvas');
 round_gl = round_canvas.getContext('webgl');
+document.getElementById("first_page").focus()
 </script>
 <script src="general/set_color.js"></script>
 <script src="general/shader_funcs.js"></script>
@@ -197,6 +279,7 @@ round_gl = round_canvas.getContext('webgl');
 <script src="round_final.js"></script>
 
 <script src="heart_main.js"></script>
+<script src="glife.js"></script>
 <!--
 -->
 </html>
