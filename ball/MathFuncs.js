@@ -408,7 +408,7 @@ function lookAt(cameraPosition=[0, 0, 24],
 }
 
 // use as Projection Matrix
-function perspective(_dst, aspect, fov, near=NEAR, far=FAR) {
+function perspective(_dst, aspect, fov, near=NEAR, far=370) {
     const dst = _dst == null ? new Float32Array([
         0, 0, 0, 0, 
         0, 0, 0, 0, 

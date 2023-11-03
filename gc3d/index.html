@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>GemCollectorWeb2</title>
+<meta name="viewport" content="width=device-width,user-scalable=0">
+<style>
+    html, body { margin:0;  }
+    body { overflow: hidden;}
+    #container {
+  position: relative;
+}
+#container gc3d_canvas, #overlay {
+  position: absolute;
+}
+ #overlay {
+  border: 5x solid white;
+  width: 99%;
+ }
+ #badge {
+    cursor: pointer;
+  position: relative;
+  float: right;
+    height: 10%;
+    left: 30px;
+ }
+</style>
+<body>
+    <div id="container">
+        <canvas id="gc3d_canvas" height=810 width=1440 style="border:0px solid black;"></canvas>
+    </div>
+</body>
+<script>
+let assets = {}
+const drawable = {}
+const drawableArrs = {}
+const gc3d_canvas = document.getElementById("gc3d_canvas");
+const gc3d_gl = gc3d_canvas.getContext('webgl') || gc3d_canvas.getContext('experimental-webgl');
+const img_generating_canvas = document.createElement("canvas")
+const img_generating_ctx = img_generating_canvas.getContext("2d")
+const Random = {
+    nextInt(start, stop) {
+        return Math.floor(start + (stop-start) * Math.random())
+    },
+}
+const Color = {
+    argb(a, r, g, b) {
+        return [a, r, g, b]
+    }
+}
+const Bitmap = {
+    createBitmap(argbArr, rows, cols) {
+        const pixels = new Uint8ClampedArray(rows*cols*4)
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                pixels[4*(cols*i + j) + 0] = argbArr[i*cols + j][1]
+                pixels[4*(cols*i + j) + 1] = argbArr[i*cols + j][2]
+                pixels[4*(cols*i + j) + 2] = argbArr[i*cols + j][3]
+                pixels[4*(cols*i + j) + 3] = argbArr[i*cols + j][0]
+            }
+        }
+        return new ImageData(pixels, rows, cols)
+    },
+    Config: {ARGB: -1},
+}
+</script>
+<script src="Assets.js"></script>
+<script src="Images.js"></script>
+<script src="StrFile.js"></script>
+<script src="comm.js"></script>
+<script src="MathFuncs.js"></script>
+<script src="DisplayObject.js"></script>
+<script src="Constants.js"></script>
+<script src="Loaders.js"></script>
+<script src="GeometryArrayMakers.js"></script>
+<script src="OpenGLHelpers.js"></script>
+<script src="GemInfo.js"></script>
+<script src="Data.js"></script>
+<script src="DrawerGem.js"></script>
+<script src="Settings.js"></script>
+<script src="DrawerVanilla.js"></script>
+<script src="DrawerScene.js"></script>
+<script src="DrawerIntro.js"></script>
+<script src="World.js"></script>
+<script src="WorldMath.js"></script>
+<script src="WorldSetRegion.js"></script>
+<script src="MyGLRenderer.js"></script>
+<script src="main.js"></script>
+</html> 

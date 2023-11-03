@@ -122,7 +122,7 @@ var Q = {
 			if(e.keyCode == 37) Q.pressedKeys.left = false;
 			if(e.keyCode == 39) Q.pressedKeys.right = false;
 		});
-		document.getElementById("mainCanvas").focus();
+		document.getElementById("mainCanvas").focus()
 		setTimeout(Q.draw,80000/1000);
 		
 	},

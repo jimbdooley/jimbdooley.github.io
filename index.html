@@ -34,7 +34,7 @@
 <body onload="bl_onload();">
 	<div id="nav_bar">
 		<button class="nav_btn" id="gem_collector_b" onclick="page('gem_collector')">Gem Collector 3D</button>
-		<button class="nav_btn" id="gemstones_b" onclick="page('gemstones')" id="first_page">Gemstones</button>
+		<button class="nav_btn" id="gemstones_b" onclick="page('gemstones')">Gemstones</button>
 		<button class="nav_btn" id="ml_anims_b" onclick="page('ml_anims')">ML Animations</button>
 		<button class="nav_btn" id="gcp_b" onclick="page('gcp')">GC Prototype</button>
 		<button class="nav_btn" id="doodles_b" onclick="page('doodles')">Doodles</button>
@@ -44,7 +44,7 @@
 		<button class="nav_btn" id="gem_craft_b" onclick="page('gem_craft')">Gem Crafting</button>
 	</div>
 	<br>
-	<div id="gemstones">
+	<div id="gemstones" style="display: none;">
 		<div class="unit">
 			<span>A demo for my tcg: </span>
 			<a class="info_p" target="_blank" href="https://www.atlazan.com">atlazan.com</a>
@@ -52,10 +52,13 @@
 			<img src="1904.jpg" style="height:600px;">
 		</div>
 	</div>
-	<div id="gem_collector" style="display: none;">
+	<div id="gem_collector">
 		<div class="unit">
-			<img src="gc3d.webp">
+			<div id="container">
+			<canvas id="gc3d_canvas" height=810 width=1440 style="border:0px solid black;"></canvas>
 		</div>
+		</div>
+
 	</div>
 	<div id="ml_anims" style="display:none;">
 		<div class="unit">
@@ -99,7 +102,7 @@
 	<div id="cyber_roller" style="display:none;">
 		<div class="unit">
 			<p class="info_p">This was a prototype of an endless runner I was considering.</p>
-			<p class="info_p">Although I didn't make it, I enjoyed making the ball squishy and fun. Use all 4 arrows to move it around.</p>
+			<p class="info_p">Although I didn't pursue it, I enjoyed making the ball squishy and fun. Use all 4 arrows to move it around.</p>
 			<canvas height="440" width="540" id="ball_canvas"></canvas>
 			<br>
 		</div>
@@ -157,7 +160,7 @@
 	<div id="tools" style ="display:none;">
 		<div class="unit">
 			<div style="display:inline;">
-				<p class="info_p">A tool I made to convert arbitrary fonts to meshses.</p>
+				<p class="info_p">A tool I made to convert arbitrary fonts to meshes.</p>
 				<button onclick="do_next()">Triangulate</button>  <br><br>
 			  <canvas id="tri_canvas"  height=630 width=450 style="display:inline;border:1px solid black;background-color: white;"></canvas>
 			  <canvas id="tri_canvas2"  height=630 width=450 style="display:inline;border:1px solid black;background-color: white;"></canvas>
@@ -258,7 +261,6 @@ heart_canvas = document.getElementById('heart_canvas');
 heart_gl = heart_canvas.getContext('webgl');
 round_canvas = document.getElementById('round_canvas');
 round_gl = round_canvas.getContext('webgl');
-document.getElementById("first_page").focus()
 </script>
 <script src="general/set_color.js"></script>
 <script src="general/shader_funcs.js"></script>
@@ -282,4 +284,45 @@ document.getElementById("first_page").focus()
 <script src="glife.js"></script>
 <!--
 -->
+<script>
+let assets = {}
+const drawable = {}
+const drawableArrs = {}
+const gc3d_canvas = document.getElementById("gc3d_canvas");
+const gc3d_gl = gc3d_canvas.getContext('webgl') || gc3d_canvas.getContext('experimental-webgl');
+const img_generating_canvas = document.createElement("canvas")
+const img_generating_ctx = img_generating_canvas.getContext("2d")
+const Random = {
+	nextInt(start, stop) {
+		return Math.floor(start + (stop-start) * Math.random())
+	},
+}
+const Color = {
+	argb(a, r, g, b) {
+		return [a, r, g, b]
+	}
+}
+</script>
+<script src="gc3d/Assets.js"></script>
+<script src="gc3d/Images.js"></script>
+<script src="gc3d/StrFile.js"></script>
+<script src="gc3d/comm.js"></script>
+<script src="gc3d/MathFuncs.js"></script>
+<script src="gc3d/DisplayObject.js"></script>
+<script src="gc3d/Constants.js"></script>
+<script src="gc3d/Loaders.js"></script>
+<script src="gc3d/GeometryArrayMakers.js"></script>
+<script src="gc3d/OpenGLHelpers.js"></script>
+<script src="gc3d/GemInfo.js"></script>
+<script src="gc3d/Data.js"></script>
+<script src="gc3d/DrawerGem.js"></script>
+<script src="gc3d/Settings.js"></script>
+<script src="gc3d/DrawerVanilla.js"></script>
+<script src="gc3d/DrawerScene.js"></script>
+<script src="gc3d/DrawerIntro.js"></script>
+<script src="gc3d/World.js"></script>
+<script src="gc3d/WorldMath.js"></script>
+<script src="gc3d/WorldSetRegion.js"></script>
+<script src="gc3d/MyGLRenderer.js"></script>
+<script src="gc3d/main.js"></script>
 </html>
