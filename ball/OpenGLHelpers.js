@@ -118,17 +118,3 @@ function PosNormIndTex(_pos, _norm, _ind, _tex) {
     return rtn
 }
 
-function initCubeTexture(loc, bmp){
-    ball_gl.bindTexture(ball_gl.TEXTURE_CUBE_MAP, loc)
-    ball_gl.texImage2D(ball_gl.TEXTURE_CUBE_MAP_POSITIVE_X, 0, ball_gl.RGBA, ball_gl.RGBA, ball_gl.UNSIGNED_BYTE, bmp)
-    ball_gl.texImage2D(ball_gl.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, ball_gl.RGBA, ball_gl.RGBA, ball_gl.UNSIGNED_BYTE, bmp)
-    ball_gl.texImage2D(ball_gl.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, ball_gl.RGBA, ball_gl.RGBA, ball_gl.UNSIGNED_BYTE, bmp)
-    ball_gl.texImage2D(ball_gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, ball_gl.RGBA, ball_gl.RGBA, ball_gl.UNSIGNED_BYTE, bmp)
-    ball_gl.texImage2D(ball_gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, ball_gl.RGBA, ball_gl.RGBA, ball_gl.UNSIGNED_BYTE, bmp)
-    ball_gl.texImage2D(ball_gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, ball_gl.RGBA, ball_gl.RGBA, ball_gl.UNSIGNED_BYTE, bmp)
-    //ball_gl.generateMipmap(ball_gl.TEXTURE_CUBE_MAP)
-    ball_gl.texParameteri(ball_gl.TEXTURE_CUBE_MAP, ball_gl.TEXTURE_MIN_FILTER, ball_gl.NEAREST)
-    ball_gl.texParameteri(ball_gl.TEXTURE_CUBE_MAP, ball_gl.TEXTURE_MAG_FILTER, ball_gl.NEAREST)
-    ball_gl.texParameteri(ball_gl.TEXTURE_CUBE_MAP, ball_gl.TEXTURE_WRAP_S, ball_gl.CLAMP_TO_EDGE)
-    ball_gl.texParameteri(ball_gl.TEXTURE_CUBE_MAP, ball_gl.TEXTURE_WRAP_T, ball_gl.CLAMP_TO_EDGE)
-}

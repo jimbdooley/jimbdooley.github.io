@@ -77,18 +77,6 @@ function Shader(vertCode, fragCode, name=null){
     return rtn
 }
 
-function PPPPTOfsInd(_ps, _tofs, _ind) {
-    return {
-        indArr :_ind,
-        pos0 : new Float32Array(_ps[0]),
-        pos1 : new Float32Array(_ps[1]),
-        pos2 : new Float32Array(_ps[2]),
-        pos3 : new Float32Array(_ps[3]),
-        tofs : new Float32Array(_tofs),
-        ind : new Uint16Array(_ind),
-    }
-}
-
 function PosNormIndTex(_pos, _norm, _ind, _tex) {
     const rtn = {}
     rtn.posArr = _pos
@@ -110,83 +98,8 @@ function PosNormIndTex(_pos, _norm, _ind, _tex) {
     return rtn
 }
 
-function PosNormIndAve(_pos, _norm, _ind, _ave) {
-    const rtn = {
-        posArr : _pos,
-        normArr : _norm,
-        indArr : _ind,
-        aveArr : _ave,
-        pos : gc3d_gl.createBuffer(),
-        norm : gc3d_gl.createBuffer(),
-        ind : gc3d_gl.createBuffer(),
-        ave : gc3d_gl.createBuffer(),
-    }
-    gc3d_gl.bindBuffer(gc3d_gl.ARRAY_BUFFER, rtn.pos)
-    gc3d_gl.bufferData(gc3d_gl.ARRAY_BUFFER, new Float32Array(rtn.posArr), gc3d_gl.STATIC_DRAW)
-    gc3d_gl.bindBuffer(gc3d_gl.ARRAY_BUFFER, rtn.norm)
-    gc3d_gl.bufferData(gc3d_gl.ARRAY_BUFFER, new Float32Array(rtn.normArr), gc3d_gl.STATIC_DRAW)
-    gc3d_gl.bindBuffer(gc3d_gl.ELEMENT_ARRAY_BUFFER, rtn.ind)
-    gc3d_gl.bufferData(gc3d_gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(rtn.indArr), gc3d_gl.STATIC_DRAW)
-    gc3d_gl.bindBuffer(gc3d_gl.ARRAY_BUFFER, rtn.ave)
-    gc3d_gl.bufferData(gc3d_gl.ARRAY_BUFFER, new Float32Array(rtn.aveArr), gc3d_gl.STATIC_DRAW)
-    return rtn
-}
 
-function PNI_to_PNIA(pni, uniteOrthogonal) {
-    const pos = new Float32Array(pni.indArr.length * 4)//FloatArray(pni.indArr.length * 4) { 0 }
-    const norm = new Float32Array(pni.indArr.length * 4)//FloatArray(pni.indArr.length * 4) { 0 }
-    const ind = new Int16Array(pni.indArr.length)//ShortArray(pni.indArr.length) { i -> i.toShort() }
-    for (let i = 0; i < ind.length; i++) ind[i] = i
-    const ave = new Float32Array(pni.indArr.length * 4)//FloatArray(pni.indArr.length * 4) { 0 }
-    for (let i = 0; i < pni.indArr.length; i += 3) {
-        const i0 = pni.indArr[i]
-        const i1 = pni.indArr[i+1]
-        const i2 = pni.indArr[i+2]
-        for (let j = 0; j < 4; j++) pos[4*i + j] = pni.posArr[4*i0 + j]
-        for (let j = 0; j < 4; j++) pos[4*i + j + 4] = pni.posArr[4*i1 + j]
-        for (let j = 0; j < 4; j++) pos[4*i + j + 8] = pni.posArr[4*i2 + j]
-        for (let j = 0; j < 4; j++) norm[4*i + j] = pni.normArr[4*i0 + j]
-        for (let j = 0; j < 4; j++) norm[4*i + j + 4] = pni.normArr[4*i1 + j]
-        for (let j = 0; j < 4; j++) norm[4*i + j + 8] = pni.normArr[4*i2 + j]
-        for (let j = 0; j < 4; j++) {
-            if (j == 3) {
-                ave[4*i + j] = 0
-                continue
-            }
-            ave[4*i + j] = ONE_THIRD * (pos[4*i + j] + pos[4*i + j + 4] + pos[4*i + j + 8])
-            ave[4*i + j + 4] = ave[4*i + j]
-            ave[4*i + j + 8] = ave[4*i + j]
-        }
-    }
-    for (let i = 0; i < norm.length; i += 12) {
-        const eqs = [i]
-        for (let j = 0; j < norm.length; j += 12) {
-            if (0.0000001 > Math.abs(norm[j]-norm[i]) + Math.abs(norm[j+1]-norm[i+1]) + Math.abs(norm[j+2]-norm[i+2])) {
-                const isOrthignal = Math.abs(norm[j]) == 1 || Math.abs(norm[j+1]) == 1 || Math.abs(norm[j+2]) == 1
-                if (!isOrthignal || uniteOrthogonal) {
-                    eqs.push(j)
-                }
-            }
-        }
-        const eqs_size = eqs.length
-        const aves = [0, 0, 0]
-        for (const j of eqs) {
-            aves[0] += ave[j+0] / eqs_size
-            aves[1] += ave[j+1] / eqs_size
-            aves[2] += ave[j+2] / eqs_size
-        }
-        for (const j of eqs) {
-            for (let k = 0; k < 12; k += 4) {
-                ave[j+k+0] = aves[0]
-                ave[j+k+1] = aves[1]
-                ave[j+k+2] = aves[2]
-            }
-        }
-    }
-    return PosNormIndAve(pos, norm, ind, ave)
-}
-
-function PosNormInd(_pos, _norm, _ind) {
+function PosNormInd_gc(_pos, _norm, _ind) {
     const rtn = {}
     rtn.posArr = _pos
     rtn.normArr = _norm

@@ -6,7 +6,6 @@ function isVerticalMode() {
 const MyGLRenderer = {}
 MyGLRenderer.dob = DisplayObject(xyz=[-12, 0, 0])
 MyGLRenderer.dobPlayGem = DisplayObject()
-MyGLRenderer.testPNIT = getStarPosNormIndTex()
 MyGLRenderer.testGemShapeArr = [GemShape.MARQUISE, GemShape.BRIOLETTE, GemShape.HEART, GemShape.RECTANGLE]
 
 adObj = DisplayObject()
